@@ -1,4 +1,4 @@
-// Libs
+// Global Imports
 import { ReactNode } from "react";
 
 interface Props {

@@ -1,11 +1,23 @@
-// Libs
-import { UserButton } from "@clerk/nextjs";
+"use client";
+
+// Global Imports
+import { useEffect } from "react";
+
+// Local Imports
+import { useStoreModal } from "@/hooks/useStoreModal";
 
 const SetupPage = () => {
+  const { isOpen, onOpen, onClose } = useStoreModal();
+
+  useEffect(() => {
+    if (!isOpen) {
+      onOpen();
+    }
+  }, [isOpen, onOpen]);
+
   return (
-    <div className="flex items-center justify-between container py-4">
-      <p>The setup page is a protected route!</p>
-      <UserButton afterSignOutUrl="/sign-up" />
+    <div>
+      Root Page
     </div>
   );
 };
