@@ -3,11 +3,12 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
+import { Toaster } from "sonner";
 
 // Local Imports
 import { cn } from "@/lib/utils/cn";
-import "@/styles/globals.css";
 import { ModalProvider } from "@/providers/modal-provider";
+import "@/styles/globals.css";
 
 // Metadata
 export const metadata: Metadata = {
@@ -36,6 +37,12 @@ const RootLayout = ({ children }: Readonly<Props>) => {
       <html lang="en" className={cn("", GeistSans.className)}>
         <body className="">
           <ModalProvider />
+          <Toaster
+            position="bottom-right"
+            richColors={true}
+            visibleToasts={3}
+            duration={3000}
+          />
           {children}
         </body>
       </html>
