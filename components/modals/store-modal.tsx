@@ -2,19 +2,25 @@
 
 // Global Imports
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { TbLoader, TbX } from "react-icons/tb";
 import { z } from "zod";
 
 // Local Imports
 import { useStoreModal } from "@/hooks/useStoreModal";
+import { createStoreFxn } from "@/lib/actions/createStore";
 import { createStoreSchema } from "@/models/zodSchemas";
-import { Modal } from "../ui/modal";
+import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import { Modal } from "../ui/modal";
+import { errorToast, successToast } from "@/lib/db/toasts";
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
+
+  const [isPending, startTransition] = useTransition();
 
   // Zod Form Validator
   const form = useForm<z.infer<typeof createStoreSchema>>({
@@ -25,8 +31,14 @@ export const StoreModal = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof createStoreSchema>) => {
-    console.log(values);
-    // TODO: Create new store
+    startTransition(async () => {
+      try {
+        const store = await createStoreFxn(values);
+        successToast("Store created!", <TbX size={20} />);
+      } catch (error) {
+        errorToast("Something went wrong!", <TbX size={20} />);
+      }
+    });
   };
 
   return (
@@ -49,7 +61,7 @@ export const StoreModal = () => {
                   <Input
                     type="text"
                     placeholder="Enter the name of the new store"
-                    disabled={form.formState.isSubmitting}
+                    disabled={isPending}
                     {...field}
                   />
                 </FormControl>
@@ -61,14 +73,21 @@ export const StoreModal = () => {
           <section className="flex flex-col-reverse gap-2 mt-6 md:flex-row md:items-center md:justify-end">
             <Button
               onClick={storeModal.onClose}
+              disabled={isPending}
               variant={"outline"}
             >
               Cancel
             </Button>
             <Button
               type="submit"
+              disabled={isPending}
             >
-              Continue
+              {isPending ?
+                <TbLoader
+                  size={24}
+                  className="animate-spin"
+                /> :
+                <span>Continue</span>}
             </Button>
           </section>
         </form>
