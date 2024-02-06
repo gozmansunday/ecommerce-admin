@@ -2,16 +2,12 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 
 // Local Imports
 import { cn } from "@/lib/utils/cn";
 import "@/styles/globals.css";
 import { ModalProvider } from "@/providers/modal-provider";
-
-// Fonts
-const inter = Inter({ subsets: ["latin"] });
 
 // Metadata
 export const metadata: Metadata = {
