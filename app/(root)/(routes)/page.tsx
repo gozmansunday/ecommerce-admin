@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useStoreModal } from "@/hooks/useStoreModal";
 
 const SetupPage = () => {
-  const { isOpen, onOpen, onClose } = useStoreModal();
+  const { isOpen, onOpen } = useStoreModal();
 
   useEffect(() => {
     if (!isOpen) {
@@ -15,11 +15,7 @@ const SetupPage = () => {
     }
   }, [isOpen, onOpen]);
 
-  return (
-    <div>
-      Root Page
-    </div>
-  );
+  return null;
 };
 
 export default SetupPage;

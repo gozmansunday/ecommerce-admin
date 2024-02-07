@@ -20,7 +20,7 @@ interface Props {
   children: ReactNode;
 };
 
-const RootLayout = ({ children }: Readonly<Props>) => {
+const RootLayout = ({ children }: Props) => {
   return (
     <ClerkProvider
       appearance={{
