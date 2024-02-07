@@ -10,12 +10,12 @@ import { z } from "zod";
 // Local Imports
 import { useStoreModal } from "@/hooks/useStoreModal";
 import { createStoreFxn } from "@/lib/actions/createStore";
+import { errorToast, successToast } from "@/lib/db/toasts";
 import { createStoreSchema } from "@/models/zodSchemas";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Modal } from "../ui/modal";
-import { errorToast, successToast } from "@/lib/db/toasts";
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
@@ -34,7 +34,11 @@ export const StoreModal = () => {
     startTransition(async () => {
       try {
         const store = await createStoreFxn(values);
+        
+        if (!store) return;
+        
         successToast("Store created!", <TbX size={20} />);
+        window.location.assign(`/${store.id}`);
       } catch (error) {
         errorToast("Something went wrong!", <TbX size={20} />);
       }
