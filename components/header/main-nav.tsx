@@ -25,7 +25,7 @@ export const MainNav = ({
 
   return (
     <nav className={cn(
-      "flex items-center gap-3 md:gap-5",
+      "hidden items-center gap-3 md:flex md:gap-5",
       className
     )}>
       {routes.map((r) => (
