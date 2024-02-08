@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 
 // Local Imports
 import db from "@/lib/db/prisma";
+import { Navbar } from "@/components/header/navbar";
 
 interface Props {
   children: ReactNode;
@@ -33,7 +34,7 @@ const DashboardLayout = async ({ children, params: { storeId } }: Props) => {
 
   return (
     <div className="">
-      <div>This is the navbar!</div>
+      <Navbar />
       {children}
     </div>
   );

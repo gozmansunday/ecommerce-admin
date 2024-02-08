@@ -30,7 +30,8 @@ const RootLayout = ({ children }: Props) => {
         },
         elements: {
           formButtonPrimary: "h-12 bg-neutral-500 text-sm normal-case hover:bg-neutral-600",
-          card: "w-[36rem]",
+          card: "shadow-none w-[40rem] md:shadow-2xl md:w-auto md:min-w-[36rem]",
+          userButtonPopoverCard: "shadow-2xl w-full",
         },
       }}
     >

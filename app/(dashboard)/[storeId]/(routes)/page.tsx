@@ -14,7 +14,7 @@ const DashboardPage = async ({ params: { storeId } }: Props) => {
   });
 
   return (
-    <div className="text-3xl font-bold">
+    <div className="container text-3xl py-4 font-bold">
       {store?.name}
     </div>
   );
