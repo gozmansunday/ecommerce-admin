@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 
 // Local Imports
-import db from "@/lib/db/prisma";
 import { Navbar } from "@/components/header/navbar";
+import db from "@/lib/db/prisma";
 
 interface Props {
   children: ReactNode;
@@ -35,7 +35,9 @@ const DashboardLayout = async ({ children, params: { storeId } }: Props) => {
   return (
     <div className="">
       <Navbar />
-      {children}
+      <div className="container">
+        {children}
+      </div>
     </div>
   );
 };
