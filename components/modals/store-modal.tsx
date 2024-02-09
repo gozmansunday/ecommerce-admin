@@ -9,7 +9,7 @@ import { z } from "zod";
 
 // Local Imports
 import { useStoreModal } from "@/hooks/useStoreModal";
-import { createStoreFxn } from "@/lib/actions/createStore";
+import { createStoreFxn } from "@/lib/actions/storeActions";
 import { errorToast, successToast } from "@/lib/db/toasts";
 import { createStoreSchema } from "@/models/zodSchemas";
 import { Button } from "../ui/button";
@@ -34,9 +34,9 @@ export const StoreModal = () => {
     startTransition(async () => {
       try {
         const store = await createStoreFxn(values);
-        
+
         if (!store) return;
-        
+
         successToast("Store created!", <TbX size={20} />);
         window.location.assign(`/${store.id}`);
       } catch (error) {

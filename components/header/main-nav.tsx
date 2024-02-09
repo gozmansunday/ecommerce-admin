@@ -34,7 +34,7 @@ export const MainNav = ({
           href={r.href}
           className={cn(
             "transition duration-200 hover:text-black",
-            r.active ? "text-black dark:text-white" : "text-neutral-400 dark:text-neutral-600"
+            r.active ? "text-black dark:text-white" : "text-neutral-500"
           )}
         >
           {r.label}
