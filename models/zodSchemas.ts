@@ -6,3 +6,9 @@ export const createStoreSchema = z.object({
     .string().trim()
     .min(1, { message: "Store name is required" }),
 });
+
+export const editStoreSchema = z.object({
+  name: z
+    .string().trim()
+    .min(1, { message: "Store name is required" }),
+});
