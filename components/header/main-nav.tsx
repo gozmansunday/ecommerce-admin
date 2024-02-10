@@ -3,10 +3,11 @@
 // Global Imports
 import { HTMLAttributes } from "react";
 import { useParams, usePathname } from "next/navigation";
+import Link from "next/link";
 
 // Local Imports
 import { cn } from "@/lib/utils/cn";
-import Link from "next/link";
+import { navbarLinks } from "@/lib/utils/navbarLinks";
 
 export const MainNav = ({
   className,
@@ -15,17 +16,11 @@ export const MainNav = ({
   const pathname = usePathname();
   const params = useParams();
 
-  const routes = [
-    {
-      href: `/${params.storeId}/settings`,
-      label: "Settings",
-      active: pathname === `/${params.storeId}/settings`,
-    },
-  ];
+  const routes = navbarLinks(params, pathname);
 
   return (
     <nav className={cn(
-      "hidden items-center gap-3 md:flex md:gap-5",
+      "flex items-center gap-3 text-sm md:gap-5",
       className
     )}>
       {routes.map((r) => (
@@ -33,13 +28,17 @@ export const MainNav = ({
           key={r.href}
           href={r.href}
           className={cn(
-            "transition duration-200 hover:text-black",
-            r.active ? "text-black dark:text-white" : "text-neutral-500"
+            "transition duration-200 py-1.5 px-1 hover:text-black",
+            r.active ? "text-black font-bold border-b-2 border-black dark:text-white" : "text-neutral-500"
           )}
         >
           {r.label}
         </Link>
       ))}
+
+      {/* FOR ADDING SPACE TO THE END OF THE NAVBAR IN MOBILE SCREENS */}
+      {/* DO NOT REMOVE!!! */}
+      <span className="invisible">a</span>
     </nav>
   );
 };

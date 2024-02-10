@@ -3,9 +3,9 @@ import { UserButton, auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 // Local Imports
+import db from "@/lib/db/prisma";
 import { MainNav } from "./main-nav";
 import { StoreSwitcher } from "./store-switcher";
-import db from "@/lib/db/prisma";
 
 export const Navbar = async () => {
   const { userId } = auth();
@@ -23,11 +23,10 @@ export const Navbar = async () => {
   return (
     <header className="border-b">
       <div className="container flex items-center justify-between h-16">
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-12">
           <StoreSwitcher
             items={stores}
           />
-          <MainNav className="" />
         </div>
 
         <div className="flex items-center">
@@ -35,6 +34,10 @@ export const Navbar = async () => {
             afterSignOutUrl="/"
           />
         </div>
+      </div>
+
+      <div className="container overflow-auto scrollable-element">
+        <MainNav />
       </div>
     </header>
   );
