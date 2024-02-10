@@ -4,7 +4,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
 import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { TbLoader, TbTrashFilled, TbX } from "react-icons/tb";
 import { z } from "zod";
@@ -18,6 +18,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Heading } from "../ui/heading";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
+import { AlertModal } from "../modals/alert-modal";
 
 interface Props {
   initialData: Store;
@@ -26,6 +27,8 @@ interface Props {
 
 export const SettingsForm = ({ initialData, storeId }: Props) => {
   const router = useRouter();
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const [isEditPending, startEditTransition] = useTransition();
   const [isDeletePending, startDeleteTransition] = useTransition();
@@ -38,6 +41,7 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
     },
   });
 
+  // Edit Store
   const onSubmit = async (values: z.infer<typeof editStoreSchema>) => {
     startEditTransition(async () => {
       try {
@@ -51,15 +55,16 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
     });
   };
 
+  // Delete Store
   const onDelete = async () => {
     startDeleteTransition(async () => {
       try {
         await deleteStoreFxn(storeId);
 
+        router.push("/");
         successToast("Store deleted!", <TbX size={20} />);
-        router.refresh();
       } catch (error) {
-        errorToast("Something went wrong!", <TbX size={20} />);
+        errorToast("Make sure all products and categories have been removed.", <TbX size={20} />);
       }
     });
   };
@@ -73,11 +78,18 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
         />
 
         <Button
+          onClick={() => setDeleteModalOpen(true)}
+          disabled={isDeletePending}
           variant={"destructive"}
           size={"icon"}
           className="flex-none"
         >
-          <TbTrashFilled size={20} />
+          {isDeletePending ?
+            <TbLoader
+              size={20}
+              className="animate-spin"
+            /> :
+            <TbTrashFilled size={20} />}
         </Button>
       </div>
 
@@ -124,6 +136,15 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
           </Button>
         </form>
       </Form>
+
+      <AlertModal
+        title="Are you sure?"
+        description="This action cannot be undone."
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={onDelete}
+        isPending={isDeletePending}
+      />
     </>
   );
 };
