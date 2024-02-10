@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { TbLoader } from "react-icons/tb";
 
 // Local Imports
-import { Modal } from "../ui/modal";
+import { Modal } from "../shared/modal";
 import { Button } from "../ui/button";
 
 interface Props {

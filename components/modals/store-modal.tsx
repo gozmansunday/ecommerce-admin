@@ -12,10 +12,10 @@ import { useStoreModal } from "@/hooks/useStoreModal";
 import { createStoreFxn } from "@/lib/actions/storeActions";
 import { errorToast, successToast } from "@/lib/db/toasts";
 import { createStoreSchema } from "@/models/zodSchemas";
+import { Modal } from "../shared/modal";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { Modal } from "../ui/modal";
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
