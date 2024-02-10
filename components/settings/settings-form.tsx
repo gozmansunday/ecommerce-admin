@@ -3,7 +3,7 @@
 // Global Imports
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { TbLoader, TbTrashFilled, TbX } from "react-icons/tb";
@@ -15,10 +15,12 @@ import { errorToast, successToast } from "@/lib/db/toasts";
 import { editStoreSchema } from "@/models/zodSchemas";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { Heading } from "../ui/heading";
+import { Heading } from "../shared/heading";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { AlertModal } from "../modals/alert-modal";
+import { ApiAlert } from "../shared/api-alert";
+import { useOrigin } from "@/hooks/useOrigin";
 
 interface Props {
   initialData: Store;
@@ -27,6 +29,9 @@ interface Props {
 
 export const SettingsForm = ({ initialData, storeId }: Props) => {
   const router = useRouter();
+  const params = useParams();
+
+  const origin = useOrigin();
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
@@ -136,6 +141,14 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
           </Button>
         </form>
       </Form>
+
+      <Separator />
+
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        description={`${origin}/api/${params.storeId}`}
+        variant="public"
+      />
 
       <AlertModal
         title="Are you sure?"
