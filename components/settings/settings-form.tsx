@@ -3,6 +3,7 @@
 // Global Imports
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
+import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
@@ -10,17 +11,16 @@ import { TbLoader, TbTrashFilled, TbX } from "react-icons/tb";
 import { z } from "zod";
 
 // Local Imports
-import { deleteStoreFxn, editStoreFxn } from "@/lib/actions/storeActions";
+import { useOrigin } from "@/hooks/useOrigin";
 import { errorToast, successToast } from "@/lib/db/toasts";
 import { editStoreSchema } from "@/models/zodSchemas";
-import { Button } from "../ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { Heading } from "../shared/heading";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
 import { AlertModal } from "../modals/alert-modal";
 import { ApiAlert } from "../shared/api-alert";
-import { useOrigin } from "@/hooks/useOrigin";
+import { Heading } from "../shared/heading";
+import { Button } from "../ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { Input } from "../ui/input";
+import { Separator } from "../ui/separator";
 
 interface Props {
   initialData: Store;
@@ -50,8 +50,7 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
   const onSubmit = async (values: z.infer<typeof editStoreSchema>) => {
     startEditTransition(async () => {
       try {
-        await editStoreFxn(values, storeId);
-
+        await axios.patch(`/api/stores/${params.storeId}`, values);
         router.refresh();
         successToast("Store updated!", <TbX size={20} />);
       } catch (error) {
@@ -64,8 +63,7 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
   const onDelete = async () => {
     startDeleteTransition(async () => {
       try {
-        await deleteStoreFxn(storeId);
-
+        await axios.delete(`/api/stores/${params.storeId}`);
         router.push("/");
         successToast("Store deleted!", <TbX size={20} />);
       } catch (error) {

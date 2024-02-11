@@ -2,6 +2,7 @@
 
 // Global Imports
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { TbLoader, TbX } from "react-icons/tb";
@@ -9,7 +10,6 @@ import { z } from "zod";
 
 // Local Imports
 import { useStoreModal } from "@/hooks/useStoreModal";
-import { createStoreFxn } from "@/lib/actions/storeActions";
 import { errorToast, successToast } from "@/lib/db/toasts";
 import { createStoreSchema } from "@/models/zodSchemas";
 import { Modal } from "../shared/modal";
@@ -33,9 +33,8 @@ export const StoreModal = () => {
   const onSubmit = async (values: z.infer<typeof createStoreSchema>) => {
     startTransition(async () => {
       try {
-        const store = await createStoreFxn(values);
-
-        if (!store) return;
+        const response = await axios.post("/api/stores", values);
+        const store = response.data;
 
         successToast("Store created!", <TbX size={20} />);
         window.location.assign(`/${store.id}`);
