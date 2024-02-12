@@ -12,3 +12,12 @@ export const editStoreSchema = z.object({
     .string().trim()
     .min(1, { message: "Store name is required" }),
 });
+
+export const createBillboardSchema = z.object({
+  label: z
+    .string().trim()
+    .min(1, { message: "Store name is required" }),
+  imageUrl: z
+    .string().trim()
+    .min(1, { message: "Image is required" }),
+});
