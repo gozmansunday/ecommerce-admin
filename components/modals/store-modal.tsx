@@ -17,20 +17,22 @@ import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 
+type StoreFormType = z.infer<typeof createStoreSchema>;
+
 export const StoreModal = () => {
   const storeModal = useStoreModal();
 
   const [isPending, startTransition] = useTransition();
 
   // Zod Form Validator
-  const form = useForm<z.infer<typeof createStoreSchema>>({
+  const form = useForm<StoreFormType>({
     resolver: zodResolver(createStoreSchema),
     defaultValues: {
       name: "",
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof createStoreSchema>) => {
+  const onSubmit = async (values: StoreFormType) => {
     startTransition(async () => {
       try {
         const response = await axios.post("/api/stores", values);

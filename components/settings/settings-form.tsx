@@ -22,12 +22,13 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 
+type SettingsFormType = z.infer<typeof editStoreSchema>;
+
 interface Props {
   initialData: Store;
-  storeId: string;
 };
 
-export const SettingsForm = ({ initialData, storeId }: Props) => {
+export const SettingsForm = ({ initialData }: Props) => {
   const router = useRouter();
   const params = useParams();
 
@@ -39,7 +40,7 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
   const [isDeletePending, startDeleteTransition] = useTransition();
 
   // Zod Form Validator
-  const form = useForm<z.infer<typeof editStoreSchema>>({
+  const form = useForm<SettingsFormType>({
     resolver: zodResolver(editStoreSchema),
     defaultValues: {
       name: initialData.name,
@@ -47,7 +48,7 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
   });
 
   // Edit Store
-  const onSubmit = async (values: z.infer<typeof editStoreSchema>) => {
+  const onSubmit = async (values: SettingsFormType) => {
     startEditTransition(async () => {
       try {
         await axios.patch(`/api/stores/${params.storeId}`, values);
@@ -74,7 +75,7 @@ export const SettingsForm = ({ initialData, storeId }: Props) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-4 md:gap-6">
         <Heading
           title="Settings"
           description="Manage store preferences"
