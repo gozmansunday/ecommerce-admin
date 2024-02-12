@@ -31,14 +31,13 @@ const SettingsPage = async ({ params: { storeId } }: Props) => {
   }
 
   return (
-    <div className="flex flex-col py-6">
+    <main className="flex flex-col py-6">
       <div>
         <SettingsForm
           initialData={store}
-          storeId={storeId}
         />
       </div>
-    </div>
+    </main>
   );
 };
 
