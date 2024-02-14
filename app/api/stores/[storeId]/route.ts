@@ -30,10 +30,10 @@ export async function PATCH(
     const store = await db.store.updateMany({
       where: {
         id: storeId,
-        userId: userId
+        userId
       },
       data: {
-        name: name,
+        name,
       }
     });
 

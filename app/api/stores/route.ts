@@ -24,8 +24,8 @@ export async function POST(
 
     const store = await db.store.create({
       data: {
-        name: name,
-        userId: userId,
+        name,
+        userId,
       },
     });
 
