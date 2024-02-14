@@ -21,7 +21,7 @@ export const Navbar = async () => {
   });
 
   return (
-    <header className="border-b">
+    <header className="sticky top-0 border-b bg-white shadow z-50">
       <div className="container flex items-center justify-between h-16">
         <div className="flex items-center gap-12">
           <StoreSwitcher

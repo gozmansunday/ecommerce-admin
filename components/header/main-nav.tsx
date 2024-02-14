@@ -28,7 +28,7 @@ export const MainNav = ({
           key={r.href}
           href={r.href}
           className={cn(
-            "transition duration-200 py-1.5 px-1 hover:text-black",
+            "transition duration-200 py-2 px-1 hover:text-black",
             r.active ? "text-black font-bold border-b-2 border-black dark:text-white" : "text-neutral-500"
           )}
         >
