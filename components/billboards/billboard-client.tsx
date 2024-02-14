@@ -26,7 +26,7 @@ export const BillboardClient = () => {
           <Button
             onClick={() => router.push(`/${params.storeId}/billboards/new`)}
             size={"default"}
-            className="hidden flex-none gap-3 md:inline-flex"
+            className="hidden flex-none gap-2 md:inline-flex"
           >
             <TbPlus size={20} />
             <span>Add New</span>

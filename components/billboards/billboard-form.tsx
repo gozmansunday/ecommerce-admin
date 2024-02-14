@@ -20,6 +20,7 @@ import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
+import { ImageUpload } from "../shared/image-upload";
 
 type BillboardsFormType = z.infer<typeof createBillboardSchema>;
 
@@ -31,10 +32,12 @@ export const BillboardForm = ({ initialData }: Props) => {
   const router = useRouter();
   const params = useParams();
 
+  // Get origin of the current website
   const origin = useOrigin();
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
+  // Handle pending states for 
   const [isCreatePending, startCreateTransition] = useTransition();
   const [isDeletePending, startDeleteTransition] = useTransition();
 
@@ -56,11 +59,16 @@ export const BillboardForm = ({ initialData }: Props) => {
   const onSubmit = async (values: BillboardsFormType) => {
     startCreateTransition(async () => {
       try {
-        const billboard = await axios.patch(`/api/stores/${params.storeId}`, values);
+        if (initialData) {
+          await axios.patch(`/api/${params.storeId}/billboards/${params.billboardId}`, values);
+        } else {
+          await axios.post(`/api/${params.storeId}/billboards`, values);
+        }
         router.refresh();
         successToast(toastMessage, <TbX size={20} />);
       } catch (error) {
         errorToast("Something went wrong!", <TbX size={20} />);
+        console.log(error);
       }
     });
   };
@@ -69,11 +77,11 @@ export const BillboardForm = ({ initialData }: Props) => {
   const onDelete = async () => {
     startDeleteTransition(async () => {
       try {
-        await axios.delete(`/api/stores/${params.storeId}`);
+        await axios.delete(`/api/${params.storeId}/billboards/${params.billboardId}`);
         router.push("/");
-        successToast("Store deleted!", <TbX size={20} />);
+        successToast("Billboard deleted!", <TbX size={20} />);
       } catch (error) {
-        errorToast("Make sure all products and categories have been removed.", <TbX size={20} />);
+        errorToast("Make sure all categories using this billboard have been removed.", <TbX size={20} />);
       }
     });
   };
@@ -111,6 +119,26 @@ export const BillboardForm = ({ initialData }: Props) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="flex flex-col gap-6"
         >
+          {/* Billboard Image */}
+          <FormField
+            control={form.control}
+            name="imageUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Billboard Image</FormLabel>
+                <FormControl>
+                  <ImageUpload
+                    disabled={isCreatePending}
+                    value={field.value ? [field.value] : []}
+                    onChange={(url) => field.onChange(url)}
+                    onRemove={() => field.onChange("")}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3">
             {/* Billboard Label */}
             <FormField
