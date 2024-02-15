@@ -16,11 +16,11 @@ import { errorToast, successToast } from "@/lib/db/toasts";
 import { createBillboardSchema } from "@/models/zodSchemas";
 import { AlertModal } from "../modals/alert-modal";
 import { Heading } from "../shared/heading";
+import { ImageUpload } from "../shared/image-upload";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
-import { ImageUpload } from "../shared/image-upload";
 
 type BillboardsFormType = z.infer<typeof createBillboardSchema>;
 
@@ -64,6 +64,7 @@ export const BillboardForm = ({ initialData }: Props) => {
         } else {
           await axios.post(`/api/${params.storeId}/billboards`, values);
         }
+        router.push(`/${params.storeId}/billboards`);
         router.refresh();
         successToast(toastMessage, <TbX size={20} />);
       } catch (error) {
@@ -73,7 +74,7 @@ export const BillboardForm = ({ initialData }: Props) => {
     });
   };
 
-  // Delete Store
+  // Delete Billboard
   const onDelete = async () => {
     startDeleteTransition(async () => {
       try {
@@ -175,8 +176,6 @@ export const BillboardForm = ({ initialData }: Props) => {
           </Button>
         </form>
       </Form>
-
-      <Separator />
 
       <AlertModal
         title="Are you sure?"

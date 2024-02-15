@@ -8,8 +8,14 @@ import { TbPlus } from "react-icons/tb";
 import { Heading } from "../shared/heading";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
+import { BillboardColumn, columns } from "./billboards-column";
+import { DataTable } from "../shared/data-table";
 
-export const BillboardClient = () => {
+interface Props {
+  billboards: BillboardColumn[];
+};
+
+export const BillboardsClient = ({ billboards }: Props) => {
   const router = useRouter();
   const params = useParams();
 
@@ -17,7 +23,7 @@ export const BillboardClient = () => {
     <div>
       <div className="flex items-center justify-between gap-4 md:gap-6">
         <Heading
-          title="Billboards"
+          title={`Billboards (${billboards.length})`}
           description="Manage billboards for your store"
         />
 
@@ -42,6 +48,12 @@ export const BillboardClient = () => {
       </div>
 
       <Separator />
+
+      <DataTable
+        columns={columns}
+        data={billboards}
+        searchKey="label"
+      />
     </div>
   );
 };
