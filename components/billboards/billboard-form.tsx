@@ -140,7 +140,7 @@ export const BillboardForm = ({ initialData }: Props) => {
             )}
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {/* Billboard Label */}
             <FormField
               control={form.control}

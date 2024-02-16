@@ -5,12 +5,12 @@ import { useParams, useRouter } from "next/navigation";
 import { TbPlus } from "react-icons/tb";
 
 // Local Imports
+import { ApiList } from "../shared/api-list";
+import { DataTable } from "../shared/data-table";
 import { Heading } from "../shared/heading";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { BillboardColumn, columns } from "./billboards-column";
-import { DataTable } from "../shared/data-table";
-import { ApiList } from "../shared/api-list";
 
 interface Props {
   billboards: BillboardColumn[];
