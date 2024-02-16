@@ -21,3 +21,12 @@ export const createBillboardSchema = z.object({
     .string().trim()
     .min(1, { message: "Image is required" }),
 });
+
+export const createCategorySchema = z.object({
+  name: z
+    .string().trim()
+    .min(1, { message: "Store name is required" }),
+  billboardId: z
+    .string().trim()
+    .min(1, { message: "Billboard ID is required" }),
+});
