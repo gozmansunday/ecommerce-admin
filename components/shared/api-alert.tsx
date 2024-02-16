@@ -6,12 +6,12 @@ import { TbClipboardCheck, TbCopy, TbServer, TbX } from "react-icons/tb";
 
 // Local Imports
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { successToast } from "@/lib/db/toasts";
 import { cn } from "@/lib/utils/cn";
+import { useEffect, useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Badge, BadgeProps } from "../ui/badge";
 import { Button } from "../ui/button";
-import { successToast } from "@/lib/db/toasts";
-import { useEffect, useState } from "react";
 
 interface Props {
   title: string;
@@ -58,12 +58,37 @@ export const ApiAlert = ({
         size={useMediaQuery("(min-width: 768px)") ? 24 : 22}
       />
 
-      <AlertTitle className="flex items-center gap-3">
-        {title}
-        <Badge variant={variantMap[variant]}>
-          {textMap[variant]}
-        </Badge>
-      </AlertTitle>
+      <div className="flex items-center justify-between">
+        <AlertTitle className="flex items-center gap-3">
+          {title}
+          <Badge variant={variantMap[variant]}>
+            {textMap[variant]}
+          </Badge>
+        </AlertTitle>
+        {/* <Button
+          onClick={() => onCopy(description)}
+          variant={"outline"}
+          size={"icon"}
+          className="flex-none"
+        >
+          {descCopied ?
+            <TbClipboardCheck size={20} /> :
+            <TbCopy size={20} />}
+        </Button> */}
+      </div>
+
+      <div className="absolute top-2 right-2 md:top-3 md:right-3">
+        <Button
+          onClick={() => onCopy(description)}
+          variant={"outline"}
+          size={"icon"}
+          className="flex-none"
+        >
+          {descCopied ?
+            <TbClipboardCheck size={20} /> :
+            <TbCopy size={20} />}
+        </Button>
+      </div>
 
       <AlertDescription
         className={cn(
@@ -74,16 +99,6 @@ export const ApiAlert = ({
         <code className="relative rounded-md px-2 py-1 text-sm font-semibold bg-neutral-100 dark:bg-neutral-900">
           {description}
         </code>
-        <Button
-          onClick={() => onCopy(description)}
-          variant={"outline"}
-          size={"icon"}
-          className="flex-none"
-        >
-          {descCopied ?
-            <TbClipboardCheck size={20} /> :
-            <TbCopy size={20} /> }
-        </Button>
       </AlertDescription>
     </Alert>
   );
