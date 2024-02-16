@@ -10,6 +10,7 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { BillboardColumn, columns } from "./billboards-column";
 import { DataTable } from "../shared/data-table";
+import { ApiList } from "../shared/api-list";
 
 interface Props {
   billboards: BillboardColumn[];
@@ -53,6 +54,18 @@ export const BillboardsClient = ({ billboards }: Props) => {
         columns={columns}
         data={billboards}
         searchKey="label"
+      />
+
+      <Heading
+        title="API"
+        description="API calls for billboards"
+      />
+
+      <Separator />
+
+      <ApiList
+        entityName="billboards"
+        entityIdName="billboardId"
       />
     </div>
   );
