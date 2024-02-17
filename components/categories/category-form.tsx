@@ -13,7 +13,7 @@ import { z } from "zod";
 // Local Imports
 import { useOrigin } from "@/hooks/useOrigin";
 import { errorToast, successToast } from "@/lib/db/toasts";
-import { createCategorySchema } from "@/models/zodSchemas";
+import { CategorySchema } from "@/models/zodSchemas";
 import { AlertModal } from "../modals/alert-modal";
 import { Heading } from "../shared/heading";
 import { Button } from "../ui/button";
@@ -22,7 +22,7 @@ import { Input } from "../ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Separator } from "../ui/separator";
 
-type CategoriesFormType = z.infer<typeof createCategorySchema>;
+type CategoriesFormType = z.infer<typeof CategorySchema>;
 
 interface Props {
   initialData: Category | null;
@@ -49,7 +49,7 @@ export const CategoryForm = ({ initialData, billboards }: Props) => {
 
   // Zod Form Validator
   const form = useForm<CategoriesFormType>({
-    resolver: zodResolver(createCategorySchema),
+    resolver: zodResolver(CategorySchema),
     defaultValues: initialData || {
       name: "",
       billboardId: ""

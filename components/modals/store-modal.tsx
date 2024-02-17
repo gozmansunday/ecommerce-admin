@@ -11,13 +11,13 @@ import { z } from "zod";
 // Local Imports
 import { useStoreModal } from "@/hooks/useStoreModal";
 import { errorToast, successToast } from "@/lib/db/toasts";
-import { createStoreSchema } from "@/models/zodSchemas";
+import { StoreSchema } from "@/models/zodSchemas";
 import { Modal } from "../shared/modal";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 
-type StoreFormType = z.infer<typeof createStoreSchema>;
+type StoreFormType = z.infer<typeof StoreSchema>;
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
@@ -26,7 +26,7 @@ export const StoreModal = () => {
 
   // Zod Form Validator
   const form = useForm<StoreFormType>({
-    resolver: zodResolver(createStoreSchema),
+    resolver: zodResolver(StoreSchema),
     defaultValues: {
       name: "",
     },

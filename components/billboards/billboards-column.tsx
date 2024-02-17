@@ -2,6 +2,8 @@
 
 // Global Imports
 import { ColumnDef } from "@tanstack/react-table";
+
+// Local Imports
 import { CellAction } from "./cell-action";
 
 export type BillboardColumn = {

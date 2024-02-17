@@ -13,7 +13,7 @@ import { z } from "zod";
 // Local Imports
 import { useOrigin } from "@/hooks/useOrigin";
 import { errorToast, successToast } from "@/lib/db/toasts";
-import { editStoreSchema } from "@/models/zodSchemas";
+import { StoreSchema } from "@/models/zodSchemas";
 import { AlertModal } from "../modals/alert-modal";
 import { ApiAlert } from "../shared/api-alert";
 import { Heading } from "../shared/heading";
@@ -22,7 +22,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 
-type SettingsFormType = z.infer<typeof editStoreSchema>;
+type SettingsFormType = z.infer<typeof StoreSchema>;
 
 interface Props {
   initialData: Store;
@@ -41,7 +41,7 @@ export const SettingsForm = ({ initialData }: Props) => {
 
   // Zod Form Validator
   const form = useForm<SettingsFormType>({
-    resolver: zodResolver(editStoreSchema),
+    resolver: zodResolver(StoreSchema),
     defaultValues: {
       name: initialData.name,
     },

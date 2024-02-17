@@ -13,7 +13,7 @@ import { z } from "zod";
 // Local Imports
 import { useOrigin } from "@/hooks/useOrigin";
 import { errorToast, successToast } from "@/lib/db/toasts";
-import { createBillboardSchema } from "@/models/zodSchemas";
+import { BillboardSchema } from "@/models/zodSchemas";
 import { AlertModal } from "../modals/alert-modal";
 import { Heading } from "../shared/heading";
 import { ImageUpload } from "../shared/image-upload";
@@ -22,7 +22,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 
-type BillboardsFormType = z.infer<typeof createBillboardSchema>;
+type BillboardsFormType = z.infer<typeof BillboardSchema>;
 
 interface Props {
   initialData: Billboard | null;
@@ -48,7 +48,7 @@ export const BillboardForm = ({ initialData }: Props) => {
 
   // Zod Form Validator
   const form = useForm<BillboardsFormType>({
-    resolver: zodResolver(createBillboardSchema),
+    resolver: zodResolver(BillboardSchema),
     defaultValues: initialData || {
       label: "",
       imageUrl: ""
