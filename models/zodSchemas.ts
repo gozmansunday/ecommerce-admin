@@ -33,3 +33,13 @@ export const SizeSchema = z.object({
     .string().trim()
     .min(1, { message: "Size value is required" }),
 });
+
+export const ColorSchema = z.object({
+  name: z
+    .string().trim()
+    .min(1, { message: "Color name is required" }),
+  value: z
+    .string().trim()
+    .min(4, { message: "Color value is required" })
+    .regex(/^#/, { message: "Color value must be a valid hex code" }),
+});
