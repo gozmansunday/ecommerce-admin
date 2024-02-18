@@ -31,7 +31,7 @@ export const CellAction = ({ data }: Props) => {
     successToast("Size ID copied!", <TbX size={20} />);
   };
 
-  // Delete Billboard
+  // Delete Sizes
   const onDelete = async () => {
     startDeleteTransition(async () => {
       try {

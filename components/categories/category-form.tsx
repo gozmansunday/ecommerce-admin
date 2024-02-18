@@ -75,7 +75,7 @@ export const CategoryForm = ({ initialData, billboards }: Props) => {
     });
   };
 
-  // Delete Billboard
+  // Delete Categories
   const onDelete = async () => {
     startDeleteTransition(async () => {
       try {
