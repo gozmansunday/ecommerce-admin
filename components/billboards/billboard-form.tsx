@@ -118,7 +118,7 @@ export const BillboardForm = ({ initialData }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 md:gap-10"
         >
           {/* Billboard Image */}
           <FormField
@@ -140,7 +140,7 @@ export const BillboardForm = ({ initialData }: Props) => {
             )}
           />
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:gap-x-6 md:gap-y-10 md:grid-cols-2 lg:grid-cols-3">
             {/* Billboard Label */}
             <FormField
               control={form.control}
@@ -151,7 +151,7 @@ export const BillboardForm = ({ initialData }: Props) => {
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Enter the label of the new billboard"
+                      placeholder="Enter the label of the billboard"
                       disabled={isCreatePending}
                       {...field}
                     />

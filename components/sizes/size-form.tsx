@@ -16,7 +16,6 @@ import { errorToast, successToast } from "@/lib/db/toasts";
 import { SizeSchema } from "@/models/zodSchemas";
 import { AlertModal } from "../modals/alert-modal";
 import { Heading } from "../shared/heading";
-import { ImageUpload } from "../shared/image-upload";
 import { Button } from "../ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
@@ -118,9 +117,9 @@ export const SizeForm = ({ initialData }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 md:gap-10"
         >
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:gap-x-6 md:gap-y-10 md:grid-cols-2 lg:grid-cols-3">
             {/* Size Name */}
             <FormField
               control={form.control}
@@ -131,7 +130,7 @@ export const SizeForm = ({ initialData }: Props) => {
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Enter the name of the new size"
+                      placeholder="Enter the name of the size"
                       disabled={isCreatePending}
                       {...field}
                     />
@@ -151,7 +150,7 @@ export const SizeForm = ({ initialData }: Props) => {
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Enter the value of the new size"
+                      placeholder="Enter the value of the size"
                       disabled={isCreatePending}
                       {...field}
                     />

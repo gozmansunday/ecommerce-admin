@@ -102,7 +102,7 @@ export const SettingsForm = ({ initialData }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 md:gap-10"
         >
           <div className="grid md:grid-cols-2 lg:grid-cols-3">
             {/* Store Name */}
@@ -115,7 +115,7 @@ export const SettingsForm = ({ initialData }: Props) => {
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Enter the name of the new store"
+                      placeholder="Enter the name of the store"
                       disabled={isEditPending}
                       {...field}
                     />

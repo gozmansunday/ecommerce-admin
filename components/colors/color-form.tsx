@@ -117,9 +117,9 @@ export const ColorForm = ({ initialData }: Props) => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-6 md:gap-10"
         >
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 md:gap-x-6 md:gap-y-10 md:grid-cols-2 lg:grid-cols-3">
             {/* Color Name */}
             <FormField
               control={form.control}
@@ -130,7 +130,7 @@ export const ColorForm = ({ initialData }: Props) => {
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Enter the name of the new color"
+                      placeholder="Enter the name of the color"
                       disabled={isCreatePending}
                       {...field}
                     />
@@ -151,7 +151,7 @@ export const ColorForm = ({ initialData }: Props) => {
                     <div className="relative flex items-center gap-4">
                       <Input
                         type="text"
-                        placeholder="Enter the value of the new color"
+                        placeholder="Enter the value of the color"
                         disabled={isCreatePending}
                         className="pr-12"
                         {...field}
