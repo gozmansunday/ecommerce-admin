@@ -2,6 +2,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
+import NextTopLoader from "nextjs-toploader";
 import { ReactNode } from "react";
 import { Toaster } from "sonner";
 
@@ -38,6 +39,13 @@ const RootLayout = ({ children }: Props) => {
       <html lang="en" className={cn("", GeistSans.className)}>
         <body className="">
           <ModalProvider />
+          <NextTopLoader
+            showSpinner={false}
+            height={3}
+            crawlSpeed={500}
+            speed={400}
+            color="#000000"
+          />
           <Toaster
             position="bottom-right"
             richColors={true}
