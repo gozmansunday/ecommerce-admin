@@ -1,4 +1,12 @@
+// Global Imports
+import { auth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+
+// Local Imports
+import { getSalesDetails } from "@/actions/get-sales-details";
+import { OverviewContent } from "@/components/overview/overview-content";
 import db from "@/lib/db/prisma";
+import { getChartData } from "@/actions/get-chart-data";
 
 interface Props {
   params: {
@@ -7,16 +15,29 @@ interface Props {
 };
 
 const DashboardPage = async ({ params: { storeId } }: Props) => {
+  const { userId } = auth();
+
+  if (!userId) {
+    redirect("/sign-in");
+  }
+
   const store = await db.store.findFirst({
     where: {
       id: storeId,
     },
   });
 
+  const salesDetails = await getSalesDetails(storeId);
+  const chartRevenue = await getChartData(storeId);
+
   return (
-    <div className="text-3xl py-6 font-bold">
-      {store?.name}
-    </div>
+    <main className="flex flex-col py-6">
+      <OverviewContent
+        store={store}
+        salesDetails={salesDetails}
+        chartRevenue={chartRevenue}
+      />
+    </main>
   );
 };
 
