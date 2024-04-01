@@ -29,7 +29,7 @@ export const Modal = ({
     if (!open) {
       onClose();
     }
-  };
+};
 
   if (isDesktop) return (
     <Dialog open={isOpen} onOpenChange={onChange}>

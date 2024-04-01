@@ -23,8 +23,8 @@ export const columns: ColumnDef<OrderColumn>[] = [
     header: "Phone",
   },
   {
-    accessorKey: "price",
-    header: "Price",
+    accessorKey: "address",
+    header: "Address",
   },
   {
     accessorKey: "totalPrice",
