@@ -1,3 +1,3 @@
 # E-Commerce Admin
 
-This is the admin repository of an E-Commerce site.
+An admin dashboard for an E-Commerce website. Built using Next.js API routes, Prisma, Clerk authentication and PostgreSQL.
