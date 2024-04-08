@@ -5,7 +5,6 @@ import { BarChart } from "@tremor/react";
 
 // Local Imports
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { moneyFormatter } from "@/lib/utils/money";
 
 interface Props {
   title: string;
