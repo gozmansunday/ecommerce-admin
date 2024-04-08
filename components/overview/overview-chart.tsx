@@ -33,6 +33,8 @@ export const OverviewChart = ({ title, chartRevenue }: Props) => {
           categories={["total"]}
           valueFormatter={dataFormatter}
           yAxisWidth={56}
+          // @ts-ignore
+          showAnimation={true}
         />
       </CardContent>
     </Card>
