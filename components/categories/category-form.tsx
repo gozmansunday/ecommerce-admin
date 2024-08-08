@@ -1,18 +1,18 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Billboard, Category } from "@prisma/client";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { TbLoader, TbTrashFilled, TbX } from "react-icons/tb";
+import { TbLoader, TbTrashFilled } from "react-icons/tb";
+import { toast } from "sonner";
 import { z } from "zod";
 
 // Local Imports
 import { useOrigin } from "@/hooks/useOrigin";
-import { errorToast, successToast } from "@/lib/db/toasts";
 import { CategorySchema } from "@/models/zodSchemas";
 import { AlertModal } from "../modals/alert-modal";
 import { Heading } from "../shared/heading";
@@ -67,9 +67,9 @@ export const CategoryForm = ({ initialData, billboards }: Props) => {
         }
         router.push(`/${params.storeId}/categories`);
         router.refresh();
-        successToast(toastMessage, <TbX size={20} />);
+        toast.success(toastMessage);
       } catch (error) {
-        errorToast("Something went wrong!", <TbX size={20} />);
+        toast.error("Something went wrong!");
         console.log(error);
       }
     });
@@ -81,9 +81,9 @@ export const CategoryForm = ({ initialData, billboards }: Props) => {
       try {
         await axios.delete(`/api/${params.storeId}/categories/${params.categoryId}`);
         router.push("/");
-        successToast("Category deleted!", <TbX size={20} />);
+        toast.success("Category deleted!");
       } catch (error) {
-        errorToast("Make sure all products using this category have been removed.", <TbX size={20} />);
+        toast.error("Make sure all products using this category have been removed.");
       }
     });
   };

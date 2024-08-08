@@ -1,12 +1,12 @@
-// Global Imports
+// External Imports
 import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 import { format } from "date-fns";
+import { redirect } from "next/navigation";
 
 // Local Imports
 import { BillboardsClient } from "@/components/billboards/billboards-client";
-import db from "@/lib/db/prisma";
 import { BillboardColumn } from "@/components/billboards/billboards-column";
+import db from "@/lib/db/prisma";
 
 interface Props {
   params: {

@@ -1,6 +1,6 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { BarChart } from "@tremor/react";
 
 // Local Imports

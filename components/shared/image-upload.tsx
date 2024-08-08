@@ -1,6 +1,6 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { CldUploadWidget } from "next-cloudinary";
 import Image from "next/image";
 import { useEffect, useState } from "react";

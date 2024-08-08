@@ -1,4 +1,4 @@
-// Global Imports
+// External Imports
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 

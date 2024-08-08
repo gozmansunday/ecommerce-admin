@@ -1,4 +1,4 @@
-// Global Imports
+// External Imports
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";

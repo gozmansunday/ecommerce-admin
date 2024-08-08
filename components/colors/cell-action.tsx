@@ -1,15 +1,15 @@
 "use client";
 
 
-// Global Imports
+// External Imports
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { TbCopy, TbDots, TbEdit, TbTrash, TbX } from "react-icons/tb";
+import { TbCopy, TbDots, TbEdit, TbTrash } from "react-icons/tb";
+import { toast } from "sonner";
 
 // Local Imports
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { errorToast, successToast } from "@/lib/db/toasts";
 import { AlertModal } from "../modals/alert-modal";
 import { Button } from "../ui/button";
 import { ColorColumn } from "./colors-column";
@@ -28,7 +28,7 @@ export const CellAction = ({ data }: Props) => {
 
   const onCopy = (description: string) => {
     navigator.clipboard.writeText(description);
-    successToast("Color ID copied!", <TbX size={20} />);
+    toast.success("Color ID copied!");
   };
 
   // Delete Color
@@ -37,10 +37,10 @@ export const CellAction = ({ data }: Props) => {
       try {
         await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
         router.refresh();
-        successToast("Color deleted!", <TbX size={20} />);
+        toast.success("Color deleted!");
         setDeleteModalOpen(false);
       } catch (error) {
-        errorToast("Make sure all products using this color have been removed.", <TbX size={20} />);
+        toast.error("Make sure all products using this color have been removed.");
       }
     });
   };

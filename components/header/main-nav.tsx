@@ -1,9 +1,9 @@
 "use client";
 
-// Global Imports
-import { HTMLAttributes } from "react";
-import { useParams, usePathname } from "next/navigation";
+// External Imports
 import Link from "next/link";
+import { useParams, usePathname } from "next/navigation";
+import { HTMLAttributes } from "react";
 
 // Local Imports
 import { cn } from "@/lib/utils/cn";

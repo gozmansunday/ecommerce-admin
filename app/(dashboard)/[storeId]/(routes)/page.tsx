@@ -1,12 +1,12 @@
-// Global Imports
+// External Imports
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 // Local Imports
+import { getChartData } from "@/actions/get-chart-data";
 import { getSalesDetails } from "@/actions/get-sales-details";
 import { OverviewContent } from "@/components/overview/overview-content";
 import db from "@/lib/db/prisma";
-import { getChartData } from "@/actions/get-chart-data";
 
 interface Props {
   params: {

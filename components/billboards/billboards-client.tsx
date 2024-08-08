@@ -1,6 +1,6 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { useParams, useRouter } from "next/navigation";
 import { TbPlus } from "react-icons/tb";
 

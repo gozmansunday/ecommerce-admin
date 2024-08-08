@@ -1,4 +1,4 @@
-// Global Imports
+// External Imports
 import { auth } from "@clerk/nextjs";
 import { format } from "date-fns";
 import { redirect } from "next/navigation";

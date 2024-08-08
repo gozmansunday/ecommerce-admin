@@ -1,6 +1,6 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { Store } from "@prisma/client";
 import { TbCreditCard, TbCurrencyDollar, TbPackage } from "react-icons/tb";
 

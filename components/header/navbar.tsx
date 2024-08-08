@@ -1,4 +1,4 @@
-// Global Imports
+// External Imports
 import { UserButton, auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 

@@ -1,18 +1,18 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { TbLoader, TbTrashFilled, TbX } from "react-icons/tb";
+import { TbLoader, TbTrashFilled } from "react-icons/tb";
+import { toast } from "sonner";
 import { z } from "zod";
 
 // Local Imports
 import { useOrigin } from "@/hooks/useOrigin";
-import { errorToast, successToast } from "@/lib/db/toasts";
 import { StoreSchema } from "@/models/zodSchemas";
 import { AlertModal } from "../modals/alert-modal";
 import { ApiAlert } from "../shared/api-alert";
@@ -53,9 +53,9 @@ export const SettingsForm = ({ initialData }: Props) => {
       try {
         await axios.patch(`/api/stores/${params.storeId}`, values);
         router.refresh();
-        successToast("Store updated!", <TbX size={20} />);
+        toast.success("Store updated!");
       } catch (error) {
-        errorToast("Something went wrong!", <TbX size={20} />);
+        toast.error("Something went wrong!");
       }
     });
   };
@@ -66,9 +66,9 @@ export const SettingsForm = ({ initialData }: Props) => {
       try {
         await axios.delete(`/api/stores/${params.storeId}`);
         router.push("/");
-        successToast("Store deleted!", <TbX size={20} />);
+        toast.success("Store deleted!");
       } catch (error) {
-        errorToast("Make sure all products and categories have been removed.", <TbX size={20} />);
+        toast.error("Make sure all products and categories have been removed.");
       }
     });
   };

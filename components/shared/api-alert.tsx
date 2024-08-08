@@ -1,14 +1,14 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { GeistMono } from "geist/font/mono";
+import { useEffect, useState } from "react";
 import { TbClipboardCheck, TbCopy, TbServer, TbX } from "react-icons/tb";
+import { toast } from "sonner";
 
 // Local Imports
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { successToast } from "@/lib/db/toasts";
 import { cn } from "@/lib/utils/cn";
-import { useEffect, useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Badge, BadgeProps } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -49,7 +49,7 @@ export const ApiAlert = ({
 
     navigator.clipboard.writeText(description);
     setDescCopied(true);
-    successToast("API Route copied!", <TbX size={20} />);
+    toast.success("API Route copied!");
   };
 
   return (

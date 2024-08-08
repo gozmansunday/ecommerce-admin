@@ -1,16 +1,16 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { TbLoader, TbX } from "react-icons/tb";
+import { TbLoader } from "react-icons/tb";
+import { toast } from "sonner";
 import { z } from "zod";
 
 // Local Imports
 import { useStoreModal } from "@/hooks/useStoreModal";
-import { errorToast, successToast } from "@/lib/db/toasts";
 import { StoreSchema } from "@/models/zodSchemas";
 import { Modal } from "../shared/modal";
 import { Button } from "../ui/button";
@@ -38,10 +38,10 @@ export const StoreModal = () => {
         const response = await axios.post("/api/stores", values);
         const store = response.data;
 
-        successToast("Store created!", <TbX size={20} />);
+        toast.success("Store created!");
         window.location.assign(`/${store.id}`);
       } catch (error) {
-        errorToast("Something went wrong!", <TbX size={20} />);
+        toast.error("Something went wrong!");
       }
     });
   };

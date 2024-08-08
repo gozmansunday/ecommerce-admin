@@ -1,6 +1,6 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { Store } from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { ComponentPropsWithoutRef, useState } from "react";

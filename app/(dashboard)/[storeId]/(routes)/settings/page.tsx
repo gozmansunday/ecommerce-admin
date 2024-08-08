@@ -1,10 +1,10 @@
-// Global Imports
+// External Imports
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
 // Local Imports
-import db from "@/lib/db/prisma";
 import { SettingsForm } from "@/components/settings/settings-form";
+import db from "@/lib/db/prisma";
 
 interface Props {
   params: {

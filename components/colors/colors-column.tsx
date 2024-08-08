@@ -1,6 +1,6 @@
 "use client"
 
-// Global Imports
+// External Imports
 import { ColumnDef } from "@tanstack/react-table";
 
 // Local Imports
@@ -21,7 +21,7 @@ export const columns: ColumnDef<ColorColumn>[] = [
   {
     accessorKey: "value",
     header: "Value",
-    cell: ({row}) => (
+    cell: ({ row }) => (
       <div className="flex items-center gap-2">
         <span>{row.original.value}</span>
         <div

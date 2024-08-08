@@ -1,4 +1,4 @@
-// Global Imports
+// External Imports
 import { z } from "zod";
 
 export const StoreSchema = z.object({

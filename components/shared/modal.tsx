@@ -1,6 +1,6 @@
 "use client";
 
-// Global Imports
+// External Imports
 import { ReactNode } from "react";
 
 // Local Imports
@@ -29,7 +29,7 @@ export const Modal = ({
     if (!open) {
       onClose();
     }
-};
+  };
 
   if (isDesktop) return (
     <Dialog open={isOpen} onOpenChange={onChange}>

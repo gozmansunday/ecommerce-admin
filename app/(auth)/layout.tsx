@@ -1,4 +1,4 @@
-// Global Imports
+// External Imports
 import { ReactNode } from "react";
 
 interface Props {

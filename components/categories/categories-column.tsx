@@ -1,6 +1,6 @@
 "use client"
 
-// Global Imports
+// External Imports
 import { ColumnDef } from "@tanstack/react-table";
 
 // Local Imports
@@ -29,6 +29,6 @@ export const columns: ColumnDef<CategoryColumn>[] = [
   },
   {
     id: "actions",
-    cell: ({row}) => <CellAction data={row.original} />,
+    cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];
