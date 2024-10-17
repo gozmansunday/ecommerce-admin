@@ -1,0 +1,19 @@
+services:
+  ec-admin:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    image: ec-admin:production
+    container_name: ec-admin-production
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - ec-admin-network
+
+networks:
+  ec-admin-network:
+    driver: bridge
