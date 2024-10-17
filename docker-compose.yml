@@ -7,7 +7,7 @@ services:
     image: ec-admin:production
     container_name: ec-admin-production
     ports:
-      - "3000:3000"
+      - "3001:3001"
     environment:
       - NODE_ENV=production
     restart: unless-stopped
